@@ -21,14 +21,7 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    general = 'GEN'
-    science = 'SCI'
-    culture = 'CUL'
-    sports = 'SPO'
-    politics = 'POL'
-    CATEGORIES = [(general, 'General'), (science, 'Science'), (culture, 'Culture'),
-                  (sports, 'Sports'), (politics, 'Politics')]
-    name = models.CharField(max_length=3, choices=CATEGORIES, default=general, unique=True)
+    name = models.CharField(max_length=64, unique=True)
 
 
 class Post(models.Model):
@@ -36,7 +29,7 @@ class Post(models.Model):
     NEWS = 'NEW'
     ARTICLE = 'ART'
     CATEGORY_CHOICES = [(NEWS, 'NEWS'), (ARTICLE, 'ARTICLE'), ]
-    category_type = models.CharField(max_length=3, choices=CATEGORY_CHOICES, default=NEWS)
+    categoryType = models.CharField(max_length=3, choices=CATEGORY_CHOICES, default=NEWS)
     dateCreated = models.DateTimeField(auto_now_add=True)
     postCategory = models.ManyToManyField(Category, through='PostCategory')
     title = models.CharField(max_length=128)
