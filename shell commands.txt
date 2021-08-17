@@ -96,14 +96,18 @@
   основываясь на лайках/дислайках к этой статье.
 34) topPost = Post.objects.order_by('-rating')[:1]
     for _ in topPost:
-        _.dateCreated
-        _.author.username #вот тут так и не смог обратится правильно
-        _.rating
-        _.title
+        print(_.dateCreated)
+        print(_.author.authorUser)
+        print(_.rating)
+        print(_.title)
         _.preview()
 
 
 # Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
-35) comms = Comment.objects.filter(post = topPost.values('dateCreated','commentUser.username', 'rating', 'text')
-    comms
-    #Тоже затрудняюсь
+35) comms = Comment.objects.filter(post = topPost)
+    for _ in comms:
+        print(_.dateCreated)
+        print(_.commentUser)
+        print(_.rating)
+        print(_.text)
+
