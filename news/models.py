@@ -6,6 +6,8 @@ from django.db.models import Sum
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
     ratingAuthor = models.SmallIntegerField(default=0)
+    first_name = User.first_name
+    last_name = User.last_name
 
     def update_rating(self):
         postRat = self.post_set.all().aggregate(postRating=Sum('rating'))
