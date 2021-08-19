@@ -1,0 +1,17 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+<h1>{{news.title|censor}}</h1>
+{{news.dateCreated|date:'d M Y h:m'}}, {{news.author}}
+<br>
+<hr>
+{{ news.text|censor }}
+
+{% endblock content %}
