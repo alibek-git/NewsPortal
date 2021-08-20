@@ -1,0 +1,13 @@
+{% extends 'templates/default.html' %}
+
+{% block title %} Post list {% endblock title %}
+
+{% block content %}
+
+<h3> Информация о посте </h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Опубликовать пост">
+</form>
+{% endblock content %}

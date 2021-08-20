@@ -1,13 +1,12 @@
 {% extends 'flatpages/default.html' %}
-
 {% load custom_filters %}
-
-{% block title %}
-Posts
-{% endblock title %}
-
-
+{% block title %} Posts {% endblock title %}
 {% block content %}
+
+<form method="GET">
+    {{ filter.form }}
+    <input type="submit" value="Search">
+</form>
     {% if news %}
 <h2>Total posts: {{news|length}}</h2>
 <table>
@@ -53,22 +52,25 @@ Posts
     {% endif %}
 {% if is_paginated %}
     {% if page_obj.has_previous %}
-        <a href="?page=1">    First    </a>
-        <a a href="?page={{page_obj.previous_page_number}}">    Previous    </a>
+        <a href="?{% param_replace page=1 %}">First</a>
+        {% if page_obj.previous_page_number != 1 %}
+            <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+        {% endif %}
     {% endif %}
 
-    {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-            <a>{{num}}</a>
-        {% elif num > page_obj.number|add:'-1' and num < page_obj.number|add:'1' %}
-            <a href="?page={{num}}">{{num}}</a>
-        {% endif %}
-    {% endfor %}
-
     {% if page_obj.has_next %}
-        <a href="?page={{page_obj.next_page_number}}">    Next    </a>
-        <a href="?page={{page_obj.paginator.num_pages}}">    Last    </a>
+        {% if page_obj.next_page_number != paginator.num_pages %}
+            <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+        {% endif %}
+        <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
     {% endif %}
 
 {% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="Submit" value="Add post">
+</form>
+
 {% endblock content %}

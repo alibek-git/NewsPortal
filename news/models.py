@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.contrib.sites.shortcuts import get_current_site
 
 
 class Author(models.Model):
@@ -22,7 +23,7 @@ class Author(models.Model):
         self.save()
 
     def __str__(self):
-        return self.authorUser.username
+        return f'{self.authorUser.username}'
 
 
 class Category(models.Model):
@@ -30,7 +31,7 @@ class Category(models.Model):
     description = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'Category'
@@ -49,6 +50,9 @@ class Post(models.Model):
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
 
+    def get_absolute_url(self):
+        return "http://127.0.0.1:8000/news/%i" % self.id
+
     def like(self):
         self.rating += 1
         self.save()
@@ -61,7 +65,7 @@ class Post(models.Model):
         return self.text[0:123] + '...'
 
     def __str__(self):
-        return self.title
+        return f'{self.title}'
 
 
 class PostCategory(models.Model):
@@ -77,7 +81,7 @@ class Comment(models.Model):
     rating = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return self.commentUser.username
+        return f'{self.commentUser.username}'
 
     def like(self):
         self.rating += 1
