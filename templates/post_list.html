@@ -24,11 +24,14 @@ Posts
                 </td>
                 <td>
                     Тип поста
+                </td>
+                <td>
+                    Рейтинг
             </tr>
         {% for news in news %}
             <tr>
                 <td>
-                    {{ news.title|censor }}
+                   <a href="{{ news.get_absolute_url }}"> {{ news.title|censor }} </a>
                 </td>
                 <td>
                     {{ news.dateCreated|date:'d M Y' }}
@@ -38,6 +41,9 @@ Posts
                 </td>
                  <td>
                     {{ news.categoryType }}
+                </td>
+                <td>
+                    {{ news.rating }}
                 </td>
 
             </tr>

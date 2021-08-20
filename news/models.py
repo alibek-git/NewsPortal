@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.contrib.sites.shortcuts import get_current_site
 
 
 class Author(models.Model):
@@ -48,6 +49,9 @@ class Post(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField()
     rating = models.SmallIntegerField(default=0)
+
+    def get_absolute_url(self):
+        return "http://127.0.0.1:8000/news/%i" % self.id
 
     def like(self):
         self.rating += 1
