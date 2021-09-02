@@ -3,23 +3,23 @@
 {% block title %} Post list {% endblock title %}
 
 {% block content %}
-<h2>Вы действительно хотите удалить данный пост?</h2>
+<h2>Are you sure you want to delete this post?</h2>
 <table>
     <thead>
         <th>
-            Заголовок
+            Title
         </th>
         <th>
-            Дата публикации
+            Published on
         </th>
         <th>
-            Превью
+            Preview
         </th>
         <th>
-            Тип поста
+            Post type
         </th>
         <th>
-            Рейтинг
+            Rating
         </th>
     </thead>
 
@@ -45,6 +45,6 @@
 
 <form method="POST">
     {% csrf_token %}
-    <input type="submit" value="Подтвердить">
+    <input type="submit" value="Confirm deletion">
 </form>
 {% endblock content %}

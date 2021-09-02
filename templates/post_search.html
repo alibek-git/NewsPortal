@@ -26,10 +26,11 @@
                 <td>
                     Rating
             </tr>
-        {% for news in news %}
+        {% for news in filter.qs %}
             <tr>
                 <td>
                    <a href="{{ news.get_absolute_url }}"> {{ news.title|censor }} </a>
+
                 </td>
                 <td>
                     {{ news.dateCreated|date:'d M Y' }}

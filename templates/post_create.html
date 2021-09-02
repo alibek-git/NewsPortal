@@ -4,10 +4,10 @@
 
 {% block content %}
 
-<h3> Информация о посте </h3>
+<h3> Please fill inputs below to create a post </h3>
 <form method="POST">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Опубликовать пост">
+    <input type="submit" value="Add post">
 </form>
 {% endblock content %}
