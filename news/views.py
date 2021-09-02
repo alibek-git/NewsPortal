@@ -35,6 +35,7 @@ class PostSearchView(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
         context['categories'] = Category.objects.all()
+        context['form'] = PostForm()
         return context
 
     def post(self, request, *args, **kwargs):
