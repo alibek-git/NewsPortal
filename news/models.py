@@ -51,7 +51,7 @@ class Post(models.Model):
     rating = models.SmallIntegerField(default=0)
 
     def get_absolute_url(self):
-        return "http://127.0.0.1:8000/news/%i" % self.id
+        return f'/news/{self.id}'
 
     def like(self):
         self.rating += 1
