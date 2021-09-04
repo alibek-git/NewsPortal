@@ -13,7 +13,7 @@ class PostListView(ListView):
     template_name = 'post_list.html'
     context_object_name = 'news'
     queryset = Post.objects.order_by('-id')
-    paginate_by = 10
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -28,7 +28,7 @@ class PostSearchView(ListView):
     template_name = 'post_search.html'
     context_object_name = 'news'
     queryset = Post.objects.order_by('-id')
-    paginate_by = 20
+    paginate_by = 10
     form_class = PostForm
 
     def get_context_data(self, **kwargs):
