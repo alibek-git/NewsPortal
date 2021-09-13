@@ -1,11 +1,12 @@
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from .models import Post, Category
+from .models import Post, Category, BaseRegisterForm
 from .filters import PostFilter
 from .forms import PostForm
 from datetime import datetime
 from django.shortcuts import render
+from django.contrib.auth.models import User
 
 
 # Main page where all posts are listed
@@ -73,3 +74,9 @@ class PostDeleteView(DeleteView):
     template_name = 'post_delete.html'
     queryset = Post.objects.all()
     success_url = '/news/search'
+
+
+class BaseRegisterView(CreateView):
+    model = User
+    form_class = BaseRegisterForm
+    success_url = '/'
