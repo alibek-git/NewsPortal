@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xwp__^mmx3y!l3n+i=d^ap=&&e%_qqlvfz0a48x=ymow97&yt^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -78,6 +78,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'NewsPortal.wsgi.application'
+
+LOGIN_URL = 'login/'
 
 
 # Database
