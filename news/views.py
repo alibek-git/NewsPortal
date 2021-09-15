@@ -74,7 +74,7 @@ class PostCreateView(CreateView):
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
-    template_name = 'post_create.html'
+    template_name = 'index.html'
     form_class = PostForm
 
     def get_object(self, **kwargs):
