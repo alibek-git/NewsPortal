@@ -36,8 +36,7 @@ class PostListView(ListView):
 
 
 # Search page with filters
-class PostSearchView(PermissionRequiredMixin, ListView):
-    permission_required = ('news.add_post', 'news.edit_post')
+class PostSearchView(ListView):
     model = Post
     template_name = 'post_search.html'
     context_object_name = 'news'
@@ -71,7 +70,8 @@ class PostCreateView(CreateView):
     form_class = PostForm
 
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = ('news.add_post', 'news.edit_post')
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
     template_name = 'index.html'
