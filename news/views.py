@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from .models import Post, Category, BaseRegisterForm
 from .filters import PostFilter
@@ -36,7 +36,8 @@ class PostListView(ListView):
 
 
 # Search page with filters
-class PostSearchView(ListView):
+class PostSearchView(PermissionRequiredMixin, ListView):
+    permission_required = ('news.add_post', 'news.edit_post')
     model = Post
     template_name = 'post_search.html'
     context_object_name = 'news'
