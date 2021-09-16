@@ -7,6 +7,9 @@
     {{ filter.form }}
     <input type="submit" value="Search">
 </form>
+{% if is_not_author %}
+<button> <a href="sign/upgrade/"> Become an author!</a> </button>
+{% endif %}
     {% if news %}
 <h2>Total posts: {{news|length}}</h2>
 <table>

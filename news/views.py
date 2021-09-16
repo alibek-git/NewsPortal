@@ -50,6 +50,7 @@ class PostSearchView(PermissionRequiredMixin, ListView):
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
         context['categories'] = Category.objects.all()
         context['form'] = PostForm()
+        context['is_not_author'] = not self.request.user.groups.filter(name='author').exists()
         return context
 
     def post(self, request, *args, **kwargs):
