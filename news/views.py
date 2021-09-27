@@ -1,14 +1,20 @@
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.core.paginator import Paginator
-from .models import Post, Category, BaseRegisterForm
+from .models import Post, Category, BaseRegisterForm, Author
 from .filters import PostFilter
 from .forms import PostForm
 from datetime import datetime
-from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, reverse
+from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+@receiver(post_save, sender=Author)
+def notify_user(sender, instance, created, **kwargs):
+    pass
 
 
 @login_required
@@ -98,3 +104,8 @@ class BaseRegisterView(CreateView):
     model = User
     form_class = BaseRegisterForm
     success_url = '/'
+
+
+class CategorySubscriptionView(View):
+    model = Category
+
