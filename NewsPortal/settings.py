@@ -55,6 +55,10 @@ DEFAULT_FROM_EMAIL = 'ALIBEK1991@GMAIL.COM'
 
 SITE_ID = 2
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
