@@ -8,13 +8,6 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, reverse
 from django.core.mail import send_mail
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-
-@receiver(post_save, sender=Author)
-def notify_user(sender, instance, created, **kwargs):
-    pass
 
 
 @login_required
