@@ -1,0 +1,46 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %} Post {% endblock title %}
+
+{% block content %}
+
+<table>
+    <thead>
+        <th>
+            Title
+        </th>
+        <th>
+            Published on
+        </th>
+        <th>
+            Preview
+        </th>
+        <th>
+            Post Type
+        </th>
+        <th>
+            Rating
+        </th>
+    </thead>
+</table>
+<tr>
+    <td>
+       <a href="{{ news.get_absolute_url }}"> {{ news.title|censor }} </a>
+    </td>
+    <td>
+        {{ news.dateCreated|date:'d M Y' }}
+    </td>
+    <td>
+        {{ news.text|truncatechars:50|censor }}
+    </td>
+     <td>
+        {{ news.categoryType }}
+    </td>
+    <td>
+        {{ news.rating }}
+    </td>
+
+</tr>
+{% endblock content %}

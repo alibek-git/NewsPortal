@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Simple SignUp/SignIn App</title>
+    </head>
+    <body>
+        <div>
+            <h1> <a href="/">Simple SignUp/SignIn App</a> </h1>
+            {% if is_not_premium %}
+            <button> <a href="sign/upgrade/"> Хочу Premium!</a> </button>
+            {% endif %}
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

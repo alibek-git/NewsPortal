@@ -1,0 +1,83 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% block title %} Posts {% endblock title %}
+{% block content %}
+
+<form method="GET">
+    {{ filter.form }}
+    <input type="submit" value="Search">
+</form>
+{% if is_not_author %}
+<button> <a href="sign/upgrade/"> Become an author!</a> </button>
+{% endif %}
+    {% if news %}
+<h2>Total posts: {{news|length}}</h2>
+<table>
+            <tr>
+                <td>
+                    Title
+                </td>
+                <td>
+                    Published on
+                </td>
+                <td>
+                    Preview
+                </td>
+                <td>
+                    Post type
+                </td>
+                <td>
+                    Rating
+            </tr>
+        {% for news in filter.qs %}
+            <tr>
+                <td>
+                   <a href="{{ news.get_absolute_url }}"> {{ news.title|censor }} </a>
+                    <a href="{{ news.get_absolute_url }}/create"> <i>Edit</i> </a>
+                    <a href="{{ news.get_absolute_url }}/delete"> <i>Delete</i> </a>
+
+
+                </td>
+                <td>
+                    {{ news.dateCreated|date:'d M Y' }}
+                </td>
+                <td>
+                    {{ news.text|truncatechars:50|censor }}
+                </td>
+                 <td>
+                    {{ news.categoryType }}
+                </td>
+                <td>
+                    {{ news.rating }}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2> No news today :( </h2>
+    {% endif %}
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a href="?{% param_replace page=1 %}">First</a>
+        {% if page_obj.previous_page_number != 1 %}
+            <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+        {% endif %}
+    {% endif %}
+
+    {% if page_obj.has_next %}
+        {% if page_obj.next_page_number != paginator.num_pages %}
+            <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+        {% endif %}
+        <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+    {% endif %}
+
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="Submit" value="Add post">
+</form>
+
+{% endblock content %}
