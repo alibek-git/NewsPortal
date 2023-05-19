@@ -170,7 +170,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/static/'
+STATIC_ROOT = 'NewsPortal/static/'
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 # Default primary key field type
